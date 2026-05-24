@@ -6,6 +6,7 @@ A super simple FastAPI application that allows students to view and sign up for 
 
 - View all available extracurricular activities
 - Sign up for activities
+- Persist activities and registrations in SQLite
 
 ## Getting Started
 
@@ -18,10 +19,18 @@ A super simple FastAPI application that allows students to view and sign up for 
 2. Run the application:
 
    ```
-   python app.py
+   uvicorn src.app:app --reload
    ```
 
-3. Open your browser and go to:
+3. Optional: choose a custom database file location.
+
+   ```
+   set ACTIVITY_DB_PATH=C:\path\to\activities.db
+   ```
+
+   If this environment variable is not set, the app creates and seeds `src/data/activities.db` automatically on first run.
+
+4. Open your browser and go to:
    - API documentation: http://localhost:8000/docs
    - Alternative documentation: http://localhost:8000/redoc
 
@@ -37,7 +46,6 @@ A super simple FastAPI application that allows students to view and sign up for 
 The application uses a simple data model with meaningful identifiers:
 
 1. **Activities** - Uses activity name as identifier:
-
    - Description
    - Schedule
    - Maximum number of participants allowed
@@ -47,4 +55,4 @@ The application uses a simple data model with meaningful identifiers:
    - Name
    - Grade level
 
-All data is stored in memory, which means data will be reset when the server restarts.
+All activity and registration data is stored in SQLite and persists across app restarts.
